@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block title %}
+        <title>base</title>
+    {% endblock %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.dataTables.min.css">
+
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar Container */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        /* Navbar Brand */
+        .navbar .brand {
+            float: left;
+            padding: 14px 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        /* Navbar Links */
+        .navbar ul {
+            list-style: none;
+            float: right;
+        }
+
+        .navbar ul li {
+            float: left;
+        }
+
+        .navbar ul li a {
+            display: block;
+            padding: 14px 20px;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #575757;
+        }
+
+        /* Responsive Navbar (Hamburger Menu) */
+        .navbar .menu-icon {
+            display: none;
+            float: right;
+            padding: 14px 20px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar ul {
+                float: none;
+                width: 100%;
+                display: none;
+                text-align: center;
+            }
+
+            .navbar ul li {
+                width: 100%;
+            }
+
+            .navbar .menu-icon {
+                display: block;
+            }
+
+            .navbar ul.active {
+                display: block;
+            }
+        }
+    </style>
+
+    {% block css %}
+    {% endblock %}
+
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <a href="#" class="brand">Django CSIT 2077</a>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <ul id="navbar-links">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'form' %}">Form</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+</div>
+
+    {% block content %}
+    {% endblock %}
+
+<!-- Optional JavaScript to toggle the menu -->
+<script>
+    function toggleMenu() {
+        var x = document.getElementById("navbar-links");
+        if (x.className === "") {
+            x.className = "active";
+        } else {
+            x.className = "";
+        }
+    }
+</script>
+
+    {% block js %}
+    {% endblock %}
+
+</body>
+</html>
