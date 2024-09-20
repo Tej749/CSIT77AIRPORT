@@ -7,6 +7,7 @@
     {% block title %}
         <title>base</title>
     {% endblock %}
+
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.dataTables.min.css">
 
     <style>
@@ -101,8 +102,8 @@
     <a href="#" class="brand">Django CSIT 2077</a>
     <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
     <ul id="navbar-links">
-        <li><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'table' %}">Home</a></li>
+        <li><a href="#">About</a></li>
         <li><a href="{% url 'form' %}">Form</a></li>
         <li><a href="{% url 'contact' %}">Contact</a></li>
     </ul>
