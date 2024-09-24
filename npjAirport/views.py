@@ -19,6 +19,7 @@ def form(request):
         mob = det.get('mob')
         email = det.get('email')
         Csit.objects.create(name=name, add=add, mob=mob, email=email)
+        return redirect("/")
 
     return render(request, "npjAirport/form.html")
 
@@ -42,6 +43,10 @@ def edit(request, pk):
 
 def contact(request):
     return render(request, "npjAirport/contact.html")
+
+def delete(request, pk):
+    Csit.objects.get(id=pk).delete()
+    return redirect('/')
 
 
 
