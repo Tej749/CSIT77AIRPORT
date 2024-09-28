@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from . import global_message
 from .models import Csit
 
 # Create your views here.
@@ -19,7 +21,8 @@ def form(request):
         mob = det.get('mob')
         email = det.get('email')
         Csit.objects.create(name=name, add=add, mob=mob, email=email)
-        return redirect("/")
+        messages.success(request, global_message.SUCCESS_MESSAGE)
+        return redirect("/form")
 
     return render(request, "npjAirport/form.html")
 
@@ -36,6 +39,7 @@ def edit(request, pk):
         dm.mob = mob
         dm.email = email
         dm.save()
+        messages.success(request, "Data Edit Successfully...!")
         return redirect('/')
     dt = Csit.objects.get(id=pk)
     return render(request, "npjAirport/edit.html", {'dt':dt})
@@ -46,6 +50,7 @@ def contact(request):
 
 def delete(request, pk):
     Csit.objects.get(id=pk).delete()
+    messages.success(request, global_message.DELETE_MSG)
     return redirect('/')
 
 
