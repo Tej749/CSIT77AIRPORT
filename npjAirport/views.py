@@ -5,12 +5,8 @@ from .models import Csit
 
 # Create your views here.
 
-def index(request):
-    data = Csit.objects.all()
-    return render(request, "npjAirport/index.html", {'data' : data})
-
 def table(request):
-    data = Csit.objects.all()
+    data = Csit.objects.filter(is_delete=False)
     return render(request, "npjAirport/table.html", {'data' : data})
 
 def form(request):
@@ -20,7 +16,7 @@ def form(request):
         add = det.get('add')
         mob = det.get('mob')
         email = det.get('email')
-        Csit.objects.create(name=name, add=add, mob=mob, email=email)
+        Csit.objects.create(name=name, add=add, mob=mob, email=email) # create method (ORM)
         messages.success(request, global_message.SUCCESS_MESSAGE)
         return redirect("/form")
 
@@ -33,7 +29,7 @@ def edit(request, pk):
         add = det.get('add')
         mob = det.get('mob')
         email = det.get('email')
-        dm = Csit.objects.get(id=pk)
+        dm = Csit.objects.get(id=pk, is_delete=True)
         dm.name = name
         dm.add = add
         dm.mob = mob
@@ -49,7 +45,9 @@ def contact(request):
     return render(request, "npjAirport/contact.html")
 
 def delete(request, pk):
-    Csit.objects.get(id=pk).delete()
+    dx = Csit.objects.get(id=pk, is_delete = False)
+    dx.is_delete = True
+    dx.save()
     messages.success(request, global_message.DELETE_MSG)
     return redirect('/')
 
